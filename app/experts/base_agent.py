@@ -1,10 +1,11 @@
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from app.models.llms import llm_instance
 
 
 def create_agent(
-        llm: ChatOpenAI,
+        llm: llm_instance,
         tools: list,
         system_prompt: str,
 ) -> AgentExecutor:
