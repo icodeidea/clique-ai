@@ -9,9 +9,6 @@ async def start():
     # Set the pipeline
     cl.user_session.set("pipeline", run_agent_pipeline)
 
-    # user session id
-    user_session_id = cl.user_session.get("id")
-
 @cl.on_message
 async def main(message: cl.Message):
     msg = cl.Message(content="")
@@ -21,7 +18,10 @@ async def main(message: cl.Message):
 
     # Process the user message using the pipeline
     try:
-        response_generator = pipeline(message=message.content)
+        response_generator = pipeline(
+            message=message.content,
+            thread_id=cl.user_session.get("id")
+        )
         for delta in response_generator:
             await msg.stream_token(str(delta))
     except TypeError as e:

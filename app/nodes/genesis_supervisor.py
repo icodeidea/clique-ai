@@ -1,5 +1,6 @@
 from app.experts.router_agent import create_team_supervisor
 from app.models.llms import llm
+from app.consts import PROJECT_MANAGER, ADMINISTRATOR, REPORTER
 
 supervisor_node = create_team_supervisor(
     llm,
@@ -8,5 +9,5 @@ supervisor_node = create_team_supervisor(
     " respond with the worker to act next. Each worker will perform a"
     " task and respond with their results and status. When finished,"
     " respond with FINISH.",
-    ["Research team", "Paper writing team"],
+    [PROJECT_MANAGER, ADMINISTRATOR, REPORTER],
 )
